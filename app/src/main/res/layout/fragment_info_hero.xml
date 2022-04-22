@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:contentDescription="@string/LOADING"
+    tools:context=".fragments.InfoHeroFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".fragments.InfoHeroFragment">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bc_stats_hero"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_margin="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/iv_hero_info_image"
+            android:layout_width="136dp"
+            android:layout_height="99dp"
+            android:layout_marginStart="137dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="138dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/tv_hero_info_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Hero name"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@+id/iv_hero_info_image"
+            app:layout_constraintStart_toStartOf="@+id/iv_hero_info_image"
+            app:layout_constraintTop_toBottomOf="@+id/iv_hero_info_image" />
+
+
+
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="582dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:dividerHeight="0.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bc_stats_hero" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="Estadisticas"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/tv_hero_info_name"
+            app:layout_constraintHorizontal_bias="0.571"
+            app:layout_constraintStart_toStartOf="@+id/tv_hero_info_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hero_info_name" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
