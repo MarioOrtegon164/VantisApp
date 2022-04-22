@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.concredito.concreditoapp.api.RestEngine
+import com.concredito.concreditoapp.utils.Utils
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import com.vantis.vantisapp.R
+import com.vantis.vantisapp.activities.MainActivity
 import com.vantis.vantisapp.adapters.HeroExpandableListAdapter
 import com.vantis.vantisapp.databinding.FragmentInfoHeroBinding
 import com.vantis.vantisapp.models.Hero
@@ -46,6 +48,7 @@ class InfoHeroFragment : Fragment() {
     private var expandableListAdapter: HeroExpandableListAdapter? = null
     private var heroDataList: List<String>? = null
     var powerStats:ArrayList<PowerStat> = ArrayList()
+    val utils = Utils()
 
     //Variables para elementos de la vista
     var chart: BarChart? = null
@@ -65,6 +68,8 @@ class InfoHeroFragment : Fragment() {
 
     //Obtiene 1 registro por ID
     private fun getHero(heroId: Int) {
+        //Mostrar modal de carga
+        activity?.let { utils.showDialogLoading(it) }
         CoroutineScope(Dispatchers.IO).launch {
             apiService.getHero(heroId)?.enqueue(object : Callback<Hero> {
                 override fun onResponse(
@@ -223,6 +228,9 @@ class InfoHeroFragment : Fragment() {
         expandableListView.setOnGroupCollapseListener { groupPosition ->}
 
         expandableListView.setOnChildClickListener { parent, v, groupPosition, childPosition, id -> false }
+
+        //Ocultar modal de carga
+        activity?.let { utils.hideDialogLoading() }
     }
 
     //Se configura la demas info del heroe para el expandible list view (Biografia,Apariencia,Trabajo y conexiones)
