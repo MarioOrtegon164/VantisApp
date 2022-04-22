@@ -71,6 +71,7 @@ class ListHeroesFragment : Fragment() {
     //Iniciamos el adaptador del RecyclerView
     private fun initAdapter() {
         heroList.clear()
+        currentPosition = 1
         adapter = HeroAdapter(heroList,viewFragment)
         binding.rvHeroes.layoutManager = LinearLayoutManager(activity)
         binding.rvHeroes.adapter = adapter
@@ -135,6 +136,7 @@ class ListHeroesFragment : Fragment() {
     //Obtiene 1 registro por ID
     private fun getHero(heroId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
+            Log.d("getHero","getHero $heroId")
             apiService.getHero(heroId)?.enqueue(object : Callback<Hero> {
                 override fun onResponse(
                     call: Call<Hero>,

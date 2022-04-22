@@ -31,7 +31,7 @@ class WelcomeFragment : Fragment() {
         //Se oculta la toolbar
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         binding.btnShowHeroesList.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.listHeroesFragment2)
+            Navigation.findNavController(view).navigate(R.id.listHeroesFragment)
         }
     }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/welcomeFragment">
     <fragment
-        android:id="@+id/listHeroesFragment2"
+        android:id="@+id/listHeroesFragment"
         android:name="com.vantis.vantisapp.fragments.ListHeroesFragment"
         android:label="fragment_list_heroes"
         tools:layout="@layout/fragment_list_heroes" >
@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_info_hero" >
         <action
             android:id="@+id/action_infoHeroFragment_to_listHeroesFragment2"
-            app:destination="@id/listHeroesFragment2"
+            app:destination="@id/listHeroesFragment"
             app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
@@ -31,6 +31,6 @@
         tools:layout="@layout/fragment_welcome" >
         <action
             android:id="@+id/action_welcomeFragment_to_listHeroesFragment2"
-            app:destination="@id/listHeroesFragment2" />
+            app:destination="@id/listHeroesFragment" />
     </fragment>
 </navigation>
