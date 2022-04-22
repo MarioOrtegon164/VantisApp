@@ -45,6 +45,7 @@ class ListHeroesFragment : Fragment() {
     var heroList: MutableList<Hero> = ArrayList()
     var isLoading = false
     private lateinit var viewFragment: View
+    var currentPosition = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,19 +79,18 @@ class ListHeroesFragment : Fragment() {
     //Generamos los primeros registros para mostrar
     private fun populateData() {
         var i = 1
-        while (i < 10) {
+        while (i < 11) {
             getHero(i)
             i++
         }
         Handler(Looper.getMainLooper()).postDelayed({
+            currentPosition = i
             initScrollListener()
         }, 1000)
     }
 
     //Evento de scroll para que se llame a la funcion de loadMore
     private fun initScrollListener() {
-        Log.d(TAG, "initScrollListener")
-
         binding.rvHeroes.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -110,8 +110,6 @@ class ListHeroesFragment : Fragment() {
 
     //Obtiene los siguientes registros para mostrar en el RecyclerView
     private fun loadMore() {
-        Log.d(TAG, "loadMore")
-
         //Se agrega un elemento para actualizar la lista y luego se elimina
         var hero = heroList[0]
         heroList.add(hero)
@@ -122,12 +120,10 @@ class ListHeroesFragment : Fragment() {
         }
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val scrollPosition: Int = heroList.size
-            var currentSize = scrollPosition
-            val nextLimit = currentSize + 10
-            while (currentSize - 1 < nextLimit) {
-                getHero(currentSize)
-                currentSize++
+            val nextLimit = currentPosition + 9
+            while (currentPosition < nextLimit) {
+                getHero(currentPosition)
+                currentPosition++
             }
             adapter.notifyDataSetChanged()
             progressBar!!.visibility = View.GONE
@@ -139,7 +135,6 @@ class ListHeroesFragment : Fragment() {
     //Obtiene 1 registro por ID
     private fun getHero(heroId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            Log.d(TAG, "getListHeroes $heroId")
             apiService.getHero(heroId)?.enqueue(object : Callback<Hero> {
                 override fun onResponse(
                     call: Call<Hero>,
@@ -148,11 +143,9 @@ class ListHeroesFragment : Fragment() {
                     val r = response.body()
                     if (r != null) {
                         if (response.isSuccessful && r.response == "success") {
-                            //Log.d(TAG, "Response success  ${r}")
                             hero = r
                             heroList.add(hero)
                             adapter.notifyDataSetChanged()
-                            ///Log.d(TAG, "heroList ${heroList.toString()}")
                         }
                     }
                 }
