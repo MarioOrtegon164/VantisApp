@@ -69,7 +69,6 @@ class ListHeroesFragment : Fragment() {
 
     //Iniciamos el adaptador del RecyclerView
     private fun initAdapter() {
-        Log.d(TAG, "initAdapter")
         heroList.clear()
         adapter = HeroAdapter(heroList,viewFragment)
         binding.rvHeroes.layoutManager = LinearLayoutManager(activity)
@@ -78,7 +77,6 @@ class ListHeroesFragment : Fragment() {
 
     //Generamos los primeros registros para mostrar
     private fun populateData() {
-        Log.d(TAG, "populateData")
         var i = 1
         while (i < 10) {
             getHero(i)

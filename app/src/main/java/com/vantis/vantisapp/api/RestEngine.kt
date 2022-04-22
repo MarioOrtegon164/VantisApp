@@ -11,8 +11,6 @@ class RestEngine {
     companion object{
 
         fun getRestEngine(): Retrofit {
-            //Cambiar la url para conexion con la api
-            //val apiUrl = "https://dog.ceo/api/";
             val apiUrl = "https://www.superheroapi.com/api.php/10217207434241759/";
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
